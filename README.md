@@ -82,6 +82,47 @@ Edit `config.py` to customize:
 - Execution timeouts
 - Ollama base URL
 
+## 📝 Key Takeaways
+
+### Dataset Quality Matters More Than Size
+
+My first attempt used a **general coding dataset** (mix of languages, styles, and tasks). The result? **Performance actually got worse** than the base model. The model learned generic patterns that conflicted with LeetCode's specific format.
+
+Switching to [LongQ/leetcode_python](https://huggingface.co/datasets/LongQ/leetcode_python) — a curated dataset of 2,369 LeetCode problems with Python solutions — made all the difference. The model learned:
+- LeetCode's exact input/output format
+- Python-specific idioms for competitive programming
+- Common algorithmic patterns (DP, BFS/DFS, two pointers, etc.)
+
+**Lesson:** Domain-specific, high-quality data beats larger generic datasets.
+
+### Training Configuration Insights
+
+| Setting | Value | Why |
+|---------|-------|-----|
+| `dataset_text_field="text"` | Required | SFTTrainer needs explicit field mapping — missing this caused garbage output |
+| `max_seq_length=2048` | Prevents OOM | LeetCode problems + solutions fit within this limit |
+| `packing=False` | Cleaner training | Packing multiple examples caused format confusion |
+| `gradient_checkpointing=True` | Memory savings | Essential for 6.7B model on 16GB GPU |
+| `load_in_4bit=True` (QLoRA) | 4x memory reduction | Enables training on consumer GPUs |
+
+### What Improved (and What Didn't)
+
+**Big wins:**
+- **Easy problems:** 30% → 52% (+72%) — model learned common patterns well
+- **Hard problems:** 9% → 29% (+214%) — surprising improvement on complex algorithms
+
+**Unexpected:**
+- **Medium problems:** 32% → 28% (-13%) — slight regression, possibly overfitting to extremes
+
+### LoRA vs Full Fine-Tuning
+
+Used **LoRA (Low-Rank Adaptation)** to train only ~40M parameters (1.1% of the model) instead of all 6.7B:
+- 🚀 Training time: ~5 hours on a single T4 GPU
+- 💾 VRAM usage: ~14GB (vs 50GB+ for full fine-tuning)
+- 📦 Adapter size: ~160MB (easily shareable)
+
+The merged FP16 model performs identically to a fully fine-tuned version for this task.
+
 ## License
 
 MIT
