@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-12-21T22:00:34.032531",
+  "models": {
+    "deepseek-leetcode-p3": {
+      "overall": {
+        "total": 100,
+        "passed": 34,
+        "failed": 66,
+        "pass_rate": 34.0
+      },
+      "by_difficulty": {
+        "easy": {
+          "total": 25,
+          "passed": 13,
+          "pass_rate": 52.0
+        },
+        "medium": {
+          "total": 54,
+          "passed": 15,
+          "pass_rate": 27.8
+        },
+        "hard": {
+          "total": 21,
+          "passed": 6,
+          "pass_rate": 28.6
+        }
+      },
+      "failed_problems": {
+        "count": 66,
+        "avg_completion_rate": 20.8
+      },
+      "timing": {
+        "avg_generation_time": 23.41,
+        "avg_execution_time": 1.057
+      }
+    }
+  }
+}

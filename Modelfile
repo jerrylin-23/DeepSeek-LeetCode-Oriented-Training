@@ -1,0 +1,10 @@
+FROM ./deepseek-leetcode-q8.gguf
+
+TEMPLATE """{{ .Prompt }}"""
+
+PARAMETER temperature 0.2
+PARAMETER top_p 0.95
+PARAMETER stop "```"
+PARAMETER num_ctx 2048
+
+SYSTEM """You are a coding assistant that solves LeetCode problems."""
