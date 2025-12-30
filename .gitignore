@@ -51,3 +51,6 @@ Thumbs.db
 
 # Results (optional - you may want to keep some)
 # results/
+
+# Data files (auto-generated, too large for git)
+data/

@@ -6,10 +6,10 @@ Benchmark and compare LLMs on LeetCode coding problems. Fine-tune your own model
 
 | Model | Overall | Easy | Medium | Hard |
 |-------|---------|------|--------|------|
-| deepseek-coder:6.7b-base | 28% | 28% | 31.5% | 19% |
+| deepseek-coder:6.7b-base | 24% | 30.3% | 32.4% | 9.1% |
 | **deepseek-leetcode (3-epoch fine-tuned)** | **34%** | **52%** | **27.8%** | **28.6%** |
 
-Fine-tuning improved performance by **21%** overall, with significant gains on Easy (+85%) and Hard (+50%) problems.
+Fine-tuning improved overall accuracy by **42%** (24% → 34%), with major gains on Easy (+72%) and Hard (+214%) problems.
 
 ## Quick Start
 
